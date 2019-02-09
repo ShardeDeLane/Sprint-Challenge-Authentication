@@ -30,7 +30,14 @@ function login(req, res) {
       ) {
         const token = generateToken(users[0])
         res.json({ message: "Successful login", token })
+      } else {
+        res.status(401).json({
+          error: "invalid username"
+        })
       }
+    })
+    .catch(error => {
+      res.status(500).json({ error })
     })
 }
 
